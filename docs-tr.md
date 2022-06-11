@@ -175,3 +175,77 @@ Daha fazla detay ve sorun giderme için, lütfen [vab GitHub deposunu](https://g
 
 </td></tr>
 </table>
+
+<!--
+Not: v:compile, cgen, live, görmezden, failcompile, oksyntax, badsyntax, wip, nofmt 
+için kod çerçevelerinden sonra koyabileceğiniz birkaç özel anahtar kelime vardır.
+Daha fazla ayrıntı için: `v check-md
+
+NB: there are several special keywords, which you can put after the code fences for v:
+compile, cgen, live, ignore, failcompile, oksyntax, badsyntax, wip, nofmt
+For more details, do: `v check-md
+-->
+
+## Hello World
+
+
+```v
+fn main() {
+	println('merhaba dünya')
+}
+```
+`hello.v` adlı bir dosya oluşturun ve bu kod parçasını dosyaya yapıştırın. Sonra bunu yapın: `v run hello.v`.
+
+> Burada V'yi [burada](https://github.com/vlang/v/blob/master/README.md#symlinking) anlatıldığını gibi 
+> `v symlink` ile symlinklediğini varsayıyorum. Eğer yapmadıysan manuel olarak V'nin konumunu yazman gerekiyor.
+
+Tebrikler, az önce ilk V programını yazdın!
+
+`v hello.v` komutunu çalıştırmadan da programını derleyebilirsin.
+`v help` yazarak desteklenen tüm komutları görebilirsin.
+
+Yukarıdaki örnekteki gibi, fonksiyonlar `fn` kelimesi ile belirtiliyor.
+Dönüş tipi fonksiyon isminden sonra belirtilir.
+Bu durumda `main` hiç bir şey döndürmüyor.
+
+Diğer bir çok programlama dilleri(C, Go ve Rust vb.) `main` programının giriş noktası. 
+Yani program çalıştığında ilk önce `main` içindeki kodlar çalışmakta.
+
+[`println`](#println) bir kaç [yerleşik fonksiyondan](#builtin-functions) bir tanesi.
+Kendisine iletilen değeri çıktıya yazdırır.
+
+Tek dosyalı programlarda `fn main()` belirtmenize gerek yoktur.
+`fn main()` küçük programlar, "scriptler" ve öğrenme sırasında daha kullanışlıdır.
+Kısa olması için bu tutorialda `fn main()` geçeceğiz.
+
+Bu demek oluyor ki V dilinde "merhaba dünya" yazdırmak şu kadar kolay:
+
+```v
+println('merhaba dünya')
+```
+
+## Birden fazla dosyası olan projeleri çalıştırma
+
+Birden fazla ".v" dosyalı bir klasörün olduğunu varsayalım, o dosyaların biri `main()` fonksiyonunu içeriyor, 
+diğerleri ise yardımcı fonksiyonları. Konuya göre düzenlenmiş olabilirler 
+fakat hala yeniden kullanılabilir modüller olarak yapılandırılmamışlar ve 
+sen onları tek bir program olarak derlemek istiyorsun.
+
+Diğer dillerde "include"lar veya tüm dosyaları numaralandırmak için 
+bir derleme sistemi kullanmanız, bunları nesne dosyalarına ayrı ayrı derlemeniz 
+ve ardından bunları son bir yürütülebilir dosyaya bağlamanız gerekir.
+
+V'de ise, tüm ".v" dosyalarının tüm klasörünü sadece `v run .` yazarak
+derleyebilirsin. Geçiş parametrelerini de aynı zamanda çalıştırabilirsin.
+Sadece şunu yapman gerekli: `v run . --yourparam some_other_stuff`
+
+Yukardaki yöntem ilk önce tüm dosyaları tek program altında(senin dosya/klasörünün adıyla) derleyecek, sonra programı CLI parametreleri olarak
+belirtilen `--yourparam some_other_stuff` ile birlikte çalıştıracaktır.
+
+Programın daha sonra aşağıdaki CLI parametrelerini kullanabilir:
+```v
+import os
+
+println(os.args)
+```
+Not: Başarılı bir çalıştırmadan sonra, V tüm çalıştırılabilir dosyaları silecektir. Eğer dosyaların silinmemesini istiyorsanız `v -keepc run .` komutunu kullanın veya `v .` komutu ile manuel olarak kopyalayın.
