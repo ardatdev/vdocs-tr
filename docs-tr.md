@@ -249,3 +249,95 @@ import os
 println(os.args)
 ```
 Not: Başarılı bir çalıştırmadan sonra, V tüm çalıştırılabilir dosyaları silecektir. Eğer dosyaların silinmemesini istiyorsanız `v -keepc run .` komutunu kullanın veya `v .` komutu ile manuel olarak kopyalayın.
+
+Not: Herhangi bir V derleyici etiketi, `run` komutundan önce belirtilmelidir.
+Kaynak dosyası/klasöründen sonra olan her şey, direkt olarak programa geçirilecektir.
+V tarafından işlenmeyecektir.
+
+## Yorum satırları
+
+```v
+// Tek satırlık yorum.
+/*
+Çok satırlı yorum.
+   /* İç içe geçmiş olabilir. */
+*/
+```
+
+## Fonksiyonlar
+
+```v
+fn main() {
+	println(add(77, 33))
+	println(sub(100, 50))
+}
+
+fn add(x int, y int) int {
+	return x + y
+}
+
+fn sub(x int, y int) int {
+	return x - y
+}
+```
+
+Yine, tür argümanın adından sonra gelir.
+
+Go ve C dilindeki gibi fonksiyonlar aşırı yüklenemez.
+Böylece kod daha sade olur ve okunulabilirliği artırır.
+
+### Hoistingler
+
+Fonksiyonlar, oluşturuldukları yerden önce kullanılabilir:
+Yani fonksiyonu satır 200'de oluşturduysanız, satır 100'de
+bu fonksiyonu çağırabilirsiniz. Mesela yukardaki örnekte
+`add` ve `sub`, `main`'den sonra belirtilmiş ama yine de
+`add` ve `sub` fonksiyonunu `main` fonksiyonunda çağırabilirseniz.
+Bu V'deki tüm fonksiyon bildirmelerinde geçerlidir ve "header" dosyalarına
+olan ihtiyacı ortadan kaldırır.
+
+### Birden fazla değer döndürme
+
+```v
+fn foo() (int, int) {
+	return 2, 3
+}
+
+a, b := foo()
+println(a) // 2
+println(b) // 3
+c, _ := foo() // `_` kullanan değerleri görmezden gelin
+```
+
+## Sembol görünürlüğü
+
+```v
+pub fn public_function() {
+}
+
+fn private_function() {
+}
+```
+
+Fonksiyonlar varsayılan olarak "private"dır(dışarıdan erişelemez).
+Diğer modüllerde fonksiyonu kullanmak için fonksiyonu belirtirken başına
+`pub` eklemeniz gerekmektedir. Aynı olay sabit değerler(constants) ve türler içinde 
+geçerlidir.
+
+Not: `pub` sadece adlandırılmış bir modülden kullananılabilir.
+Modüller hakkında daha fazla bilgi için [Modüller](#modules)
+bölümüne bakın.
+
+## Değişkenler
+
+```v
+name := 'Bob'
+age := 20
+large_number := i64(9999999999)
+println(name)
+println(age)
+println(large_number)
+```
+Değişkenler `:=` ile bildirilir. 
+
+
