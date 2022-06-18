@@ -338,6 +338,11 @@ println(name)
 println(age)
 println(large_number)
 ```
-Değişkenler `:=` ile bildirilir. 
+Değişkenler `:=` ile bildirilir. V'de sadece bu yolla değişkenleri belirtebilirsiniz.
+Bu yüzden her değişkenin bir başlangıç değeri olur. 
+
+Değişkenin türü sağ taraftaki değerden çıkarılır, yani `:=` sonrasına göre belirlenir.
+Farklı bir tür seçmek için, tür dönüştürmeyi kullanın: T(v) ifadesi, v değerini 
+T tipine dönüştürür. 
 
 
