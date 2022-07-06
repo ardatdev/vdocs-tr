@@ -345,4 +345,9 @@ Değişkenin türü sağ taraftaki değerden çıkarılır, yani `:=` sonrasına
 Farklı bir tür seçmek için, tür dönüştürmeyi kullanın: T(v) ifadesi, v değerini 
 T tipine dönüştürür. 
 
+Çoğu diğer programlama dillerinin aksine, V sadece fonksiyonlar içinde
+değişken belirtmeye izin verir. Global değişkenlere izin verilmez.
+V'de global durum yoktur.
 
+Diğer kod tabanları ile tutarlılık için tüm değişken ve fonksiyon adları
+`PascalCase` kullanması gereken tür adlarının aksine `snake_case` tarzını kullanmalıdır. 
